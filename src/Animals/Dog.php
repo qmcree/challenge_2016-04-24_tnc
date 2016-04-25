@@ -2,16 +2,32 @@
 
 namespace Challenge\Animals;
 
+use Challenge\Exceptions\ScaredException;
 
 class Dog
 {
-    public function __construct()
+    const SPEAK_SOUND = 'ruff';
+
+    protected $cat;
+
+    /**
+     * Dog constructor.
+     * @param Cat $cat
+     */
+    public function __construct($cat)
     {
-        //
+        $this->cat = $cat;
     }
 
-    public static function speak()
+    /**
+     * @return string
+     * @throws ScaredException
+     */
+    public function speak()
     {
-        return 'ruff';
+        if ($this->cat->hasHissed())
+            throw new ScaredException;
+        
+        return self::SPEAK_SOUND;
     }
 }
